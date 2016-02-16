@@ -27,7 +27,6 @@ class Contact
     # Returns an Array of Contacts loaded from the database.
     def print_id
       contacts = CSV.read(@@file_path)
-      # TODO: Return an Array of Contact instances made from the data in 'contacts.csv'.
     end
 
     # Creates a new contact, adding it to the database, returning the new contact.
@@ -64,10 +63,12 @@ class Contact
     end
 
     def create(name, email)
-      #take in two parameters, add to array
-      CSV.open(@@file_path) do |csv|
-      csv << name && csv << email
-      # array = []
+      id = CSV.read(@@file_path).length
+      CSV.open(@@file_path, "a+t") do |csv|
+      csv << [id, name, email]
+
+
+      puts csv.read             # array = []
       # array.to_s << name && array.to_s << email
       # CSV << array.to_s
     end
